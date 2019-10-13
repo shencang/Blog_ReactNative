@@ -4,11 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Message
+import android.renderscript.Allocation
+import android.util.Log
+import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
 import com.shengcangblue.blogrn.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
     private val mHandler = SplashHandle(this)
 
     // 将常量放入这里
@@ -26,7 +30,32 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        initView()
 
+    }
+    private fun initView(){
+        splashImage!!.findViewById<View>(R.id.splashImage)
+        var viewProportion = ViewUtil(this)
+        var proportion :Float = viewProportion.proportion
+        if (proportion<=((9/16)*1.1)&&proportion>=(9/16)*0.9){
+            splashImage!!.setImageResource(R.mipmap.spl16d5a9)
+            Log.i("viewProportion","9/16")
+        }else if (proportion<=((9/18)*1.1)&&proportion>=(9/18)*0.9){
+            splashImage!!.setImageResource(R.mipmap.spl18a9)
+            Log.i("viewProportion","9/18")
+        }else if (proportion<=((9/19)*1.1)&&proportion>=(9/19)*0.9){
+            splashImage!!.setImageResource(R.mipmap.spl19d5a9)
+            Log.i("viewProportion","9/19")
+        } else if (proportion<=((9/19.5)*1.1)&&proportion>=(9/19.5)*0.9){
+            splashImage!!.setImageResource(R.mipmap.spl19d5a9)
+            Log.i("viewProportion","9/19.5")
+        }else if (proportion<=((9/20.5)*1.1)&&proportion>=(9/20.5)*0.9){
+            splashImage!!.setImageResource(R.mipmap.spl20d5a9)
+            Log.i("viewProportion","9/20.5")
+        }else if (proportion<=((9/21.5)*1.1)&&proportion>=(9/21.5)*0.9){
+            splashImage!!.setImageResource(R.mipmap.spl21d5a9)
+            Log.i("viewProportion","9/21.5")
+        }
     }
 
     override fun onResume() {
@@ -58,6 +87,8 @@ class MainActivity : AppCompatActivity() {
             mHandler.sendMessage(message)
         }
     }
+
+
 
     // 弱引用handler内部类
     private class SplashHandle(cls : MainActivity) : UIHandler<MainActivity>(cls) {

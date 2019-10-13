@@ -11,9 +11,8 @@
         android:id="@+id/splashImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/timg"
+        android:src="@mipmap/spl18a9"
         android:scaleType="fitXY">
-
     </ImageView>
 
 
