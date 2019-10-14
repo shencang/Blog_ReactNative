@@ -4,12 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Message
-import android.renderscript.Allocation
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.ImageView
 import com.shengcangblue.blogrn.R
+import com.shengcangblue.blogrn.util.ViewUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -22,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         const val MSG_LAUNCH : Int = 0
 
         // 延时时间
-        const val SLEEP_TIME = 3000
+        const val SLEEP_TIME = 2000
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,24 +36,35 @@ class MainActivity : AppCompatActivity() {
         splashImage!!.findViewById<View>(R.id.splashImage)
         var viewProportion = ViewUtil(this)
         var proportion :Float = viewProportion.proportion
-        if (proportion<=((9/16)*1.1)&&proportion>=(9/16)*0.9){
-            splashImage!!.setImageResource(R.mipmap.spl16d5a9)
-            Log.i("viewProportion","9/16")
-        }else if (proportion<=((9/18)*1.1)&&proportion>=(9/18)*0.9){
-            splashImage!!.setImageResource(R.mipmap.spl18a9)
-            Log.i("viewProportion","9/18")
-        }else if (proportion<=((9/19)*1.1)&&proportion>=(9/19)*0.9){
-            splashImage!!.setImageResource(R.mipmap.spl19d5a9)
-            Log.i("viewProportion","9/19")
-        } else if (proportion<=((9/19.5)*1.1)&&proportion>=(9/19.5)*0.9){
-            splashImage!!.setImageResource(R.mipmap.spl19d5a9)
-            Log.i("viewProportion","9/19.5")
-        }else if (proportion<=((9/20.5)*1.1)&&proportion>=(9/20.5)*0.9){
-            splashImage!!.setImageResource(R.mipmap.spl20d5a9)
-            Log.i("viewProportion","9/20.5")
-        }else if (proportion<=((9/21.5)*1.1)&&proportion>=(9/21.5)*0.9){
-            splashImage!!.setImageResource(R.mipmap.spl21d5a9)
-            Log.i("viewProportion","9/21.5")
+        viewProportion.dis(windowManager)
+        if(viewProportion.widthPixel/120==9f){
+            Log.i("viewProportion","9/?")
+            if (viewProportion.heightPixel/120==16f){
+                splashImage!!.setImageResource(R.mipmap.spl16d5a9)
+                Log.i("viewProportion","16")
+            }
+            if (viewProportion.heightPixel/120==18f){
+                splashImage!!.setImageResource(R.mipmap.spl18a9)
+                Log.i("viewProportion","18")
+            }
+            if (viewProportion.heightPixel/120==19f){
+                splashImage!!.setImageResource(R.mipmap.spl19a9)
+                Log.i("viewProportion","19")
+            }
+            if (viewProportion.heightPixel/120==19.5f){
+                splashImage!!.setImageResource(R.mipmap.spl19d5a9)
+                Log.i("viewProportion","19.5")
+            }
+            if (viewProportion.heightPixel/120==20.5f){
+                splashImage!!.setImageResource(R.mipmap.spl20d5a9)
+                Log.i("viewProportion","20.5")
+            }
+            if (viewProportion.heightPixel/120==21.5f){
+                splashImage!!.setImageResource(R.mipmap.spl21d5a9)
+                Log.i("viewProportion","21.5")
+            }
+
+
         }
     }
 

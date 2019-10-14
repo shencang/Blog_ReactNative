@@ -1,16 +1,18 @@
-package com.shengcangblue.blogrn.activity
+package com.shengcangblue.blogrn.util
 
 import android.content.Context
+import android.util.DisplayMetrics
 import android.util.Log
+import android.view.WindowManager
 
 class ViewUtil {
     /**
      * @ 获取当前手机屏幕的尺寸(单位:像素)
      */
-    private var width: Float = 0.0f
-    private var height: Float = 0.0f
-    private var widthPixel: Float = 0.0f
-    private var heightPixel: Float = 0.0f
+     var width: Float = 0.0f
+     var height: Float = 0.0f
+     var widthPixel: Float = 0.0f
+     var heightPixel: Float = 0.0f
     // 这样可以计算屏幕的物理尺寸
     val pingMuSize: Float
         get() = Math.sqrt((width + height).toDouble()).toFloat()
@@ -31,8 +33,6 @@ class ViewUtil {
         val ydpi = mContext.resources.displayMetrics.ydpi
         val widths = mContext.resources.displayMetrics.widthPixels
         val heights = mContext.resources.displayMetrics.heightPixels
-        this.widthPixel = widths.toFloat()
-        this.heightPixel = heights.toFloat()
         this.width = widths / xdpi * (widths / xdpi)
         this.height = (heights) / ydpi * (widths / xdpi)
         Log.i("viewProportion", this.width.toString())
@@ -42,5 +42,18 @@ class ViewUtil {
         Log.i("viewProportions",(widthPixel / (heightPixel)).toString() )
 
     }
+
+    fun dis(windowManager: WindowManager) {
+        val outMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getRealMetrics(outMetrics)
+        val widthPixel = outMetrics.widthPixels
+        val heightPixel = outMetrics.heightPixels
+        Log.i("viewProportion", "widthPixel = $widthPixel,heightPixel = $heightPixel")
+        //widthPixel = 1440,heightPixel = 2960
+        this.widthPixel = widthPixel.toFloat()
+        this.heightPixel = heightPixel.toFloat()
+
+    }
+
 
 }
