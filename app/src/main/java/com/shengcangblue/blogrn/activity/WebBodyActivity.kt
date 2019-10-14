@@ -30,9 +30,9 @@ class WebBodyActivity : AppCompatActivity() {
     fun initAndSetupView() {
         val webViewContainer = findViewById<FrameLayout>(R.id.webContainer)
         val params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
-        mWebView = WebView(applicationContext)
+        this.mWebView = WebView(applicationContext)
         webViewContainer.addView(mWebView, params)
-        var webSettings = mWebView!!.settings
+        val webSettings = mWebView!!.settings
         webSettings.javaScriptEnabled = true
         webSettings.javaScriptCanOpenWindowsAutomatically = true
         webSettings.allowFileAccess = true// 设置允许访问文件数据
@@ -58,7 +58,7 @@ class WebBodyActivity : AppCompatActivity() {
         val action = event.action
         val webView = v as WebView
         if (KeyEvent.ACTION_DOWN == action && KeyEvent.KEYCODE_BACK == keyCode) {
-            if (webView?.canGoBack()) {
+            if (webView.canGoBack()) {
                 webView.goBack()
                 return@OnKeyListener true
             }

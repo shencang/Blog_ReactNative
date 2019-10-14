@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     }
     private fun initView(){
         splashImage!!.findViewById<View>(R.id.splashImage)
-        var viewProportion = ViewUtil(this)
+        val viewProportion = ViewUtil(this)
         var proportion :Float = viewProportion.proportion
         viewProportion.dis(windowManager)
         if(viewProportion.widthPixel/120==9f){
