@@ -37,13 +37,13 @@ class MainActivity : AppCompatActivity() {
         val viewProportion = ViewUtil(this)
         var proportion :Float = viewProportion.proportion
         viewProportion.dis(windowManager)
-        if(viewProportion.widthPixel/120==9f){
-            Log.i("viewProportion","9/?")
-            if (viewProportion.heightPixel/120==16f){
+        if((viewProportion.widthPixel/120)%3f==0f){
+            Log.i("viewProportion","${viewProportion.widthPixel/120f} /?")
+            if (viewProportion.heightPixel/120==16f||viewProportion.heightPixel/120==24f){
                 splashImage!!.setImageResource(R.mipmap.spl16d5a9)
                 Log.i("viewProportion","16")
             }
-            if (viewProportion.heightPixel/120==18f){
+            if (viewProportion.heightPixel/120==18f||viewProportion.heightPixel/120==27f){
                 splashImage!!.setImageResource(R.mipmap.spl18a9)
                 Log.i("viewProportion","18")
             }
