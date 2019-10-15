@@ -35,36 +35,44 @@ class MainActivity : AppCompatActivity() {
     private fun initView(){
         splashImage!!.findViewById<View>(R.id.splashImage)
         val viewProportion = ViewUtil(this)
-        var proportion :Float = viewProportion.proportion
         viewProportion.dis(windowManager)
-        if((viewProportion.widthPixel/120)%3f==0f){
+        val proportion :Float = viewProportion.proportion
+        if(((viewProportion.widthPixel/120)%3f).equals(0f)){
             Log.i("viewProportion","${viewProportion.widthPixel/120f} /?")
-            if (viewProportion.heightPixel/120==16f||viewProportion.heightPixel/120==24f){
+            if ((proportion).equals(9/16f)){
                 splashImage!!.setImageResource(R.mipmap.spl16d5a9)
-                Log.i("viewProportion","16")
+                Log.i("viewProportion","9/16")
             }
-            if (viewProportion.heightPixel/120==18f||viewProportion.heightPixel/120==27f){
+            if ((proportion).equals(1/2f)){
                 splashImage!!.setImageResource(R.mipmap.spl18a9)
-                Log.i("viewProportion","18")
+                Log.i("viewProportion","9/18")
             }
-            if (viewProportion.heightPixel/120==19f){
+            if ((proportion).equals(9/19f)){
                 splashImage!!.setImageResource(R.mipmap.spl19a9)
-                Log.i("viewProportion","19")
+                Log.i("viewProportion","9/19")
             }
-            if (viewProportion.heightPixel/120==19.5f){
+            if ((proportion).equals(9/19.5f)){
                 splashImage!!.setImageResource(R.mipmap.spl19d5a9)
-                Log.i("viewProportion","19.5")
+                Log.i("viewProportion","9/19.5")
             }
-            if (viewProportion.heightPixel/120==20.5f){
+            if ((proportion).equals(9/20.5f)){
                 splashImage!!.setImageResource(R.mipmap.spl20d5a9)
-                Log.i("viewProportion","20.5")
+                Log.i("viewProportion","9/20.5")
             }
-            if (viewProportion.heightPixel/120==21.5f){
+            if ((proportion).equals(9/21.5f)){
                 splashImage!!.setImageResource(R.mipmap.spl21d5a9)
-                Log.i("viewProportion","21.5")
+                Log.i("viewProportion","9/21.5")
             }
-
-
+            if ((proportion).equals(3/4f)){
+                //todo 添加新的图片
+                //splashImage!!.setImageResource(R.mipmap.spl21d5a9)
+                Log.i("viewProportion","3/4")
+            }
+            if ((proportion).equals(2/3f)){
+                //TODO 添加新的图片
+               // splashImage!!.setImageResource(R.mipmap.spl21d5a9)
+                Log.i("viewProportion","2/3")
+            }
         }
     }
 

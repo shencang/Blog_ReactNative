@@ -18,7 +18,7 @@ class ViewUtil {
         get() = Math.sqrt((width + height).toDouble()).toFloat()
 
     val proportion: Float
-        get() = (widthPixel / (heightPixel))
+        get() = (widthPixel / heightPixel)
 
 
     internal constructor() {
