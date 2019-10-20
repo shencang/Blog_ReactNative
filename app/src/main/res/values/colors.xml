@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#FCFCFC</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimaryDark">#FCFCFC</color>
+    <color name="colorPrimaryDarkS">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorWaite">#FCFCFC</color>
+    <color name="statusBarColorWhite">#FFFFFF</color>
+    <color name="statusBarColorDarkBlue">#1C2E45</color>
+    <color name="statusBarColor">#00000000</color>
 </resources>
