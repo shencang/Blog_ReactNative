@@ -9,8 +9,8 @@ class ViewUtil {
     /**
      * @ 获取当前手机屏幕的尺寸(单位:像素)
      */
-     var width: Float = 0.0f
-     var height: Float = 0.0f
+    private var width: Float = 0.0f
+     private var height: Float = 0.0f
      var widthPixel: Float = 0.0f
      var heightPixel: Float = 0.0f
     // 这样可以计算屏幕的物理尺寸

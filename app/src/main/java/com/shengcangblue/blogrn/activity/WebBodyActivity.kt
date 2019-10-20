@@ -12,12 +12,14 @@ import android.webkit.WebViewClient
 import android.widget.FrameLayout
 import android.widget.Toast
 import com.shengcangblue.blogrn.R
+import com.shengcangblue.blogrn.util.Constants
 import com.shengcangblue.blogrn.util.StatusBarUtil
+import java.util.*
 
 class WebBodyActivity : AppCompatActivity() {
     //定义变量
     private var mWebView: WebView? = null
-    private val blogUrl = "http://blog.shencangblue.com/"
+
     private var mExitTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +27,18 @@ class WebBodyActivity : AppCompatActivity() {
         setContentView(R.layout.activity_web_body)
         supportActionBar?.hide()
         initAndSetupView()
+        initStatusBar()
+
+    }
+    private fun changeStatusBarColor(colorId:Int){
+        if (!StatusBarUtil.setStatusBarDarkTheme(this, true)) {
+            //如果不支持设置深色风格 为了兼容总不能让状态栏白白的看不清, 于是设置一个状态栏颜色为半透明,
+            //这样半透明+白=灰, 状态栏的文字能看得清
+            StatusBarUtil.setStatusBarColor(this, colorId)
+        }
+    }
+
+    private fun initStatusBar() {
         //这里注意下 因为在评论区发现有网友调用setRootViewFitsSystemWindows 里面 winContent.getChildCount()=0 导致代码无法继续
         //是因为你需要在setContentView之后才可以调用 setRootViewFitsSystemWindows
 
@@ -37,14 +51,17 @@ class WebBodyActivity : AppCompatActivity() {
         if (!StatusBarUtil.setStatusBarDarkTheme(this, true)) {
             //如果不支持设置深色风格 为了兼容总不能让状态栏白白的看不清, 于是设置一个状态栏颜色为半透明,
             //这样半透明+白=灰, 状态栏的文字能看得清
-            StatusBarUtil.setStatusBarColor(this, R.color.colorPrimary)
+            StatusBarUtil.setStatusBarColor(this, R.color.colorPrimaryDark)
         }
     }
 
     // 初始化对象
-    fun initAndSetupView() {
+    private fun initAndSetupView() {
         val webViewContainer = findViewById<FrameLayout>(R.id.webContainer)
-        val params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
+        val params = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.MATCH_PARENT
+        )
         this.mWebView = WebView(applicationContext)
         webViewContainer.addView(mWebView, params)
         val webSettings = mWebView!!.settings
@@ -53,20 +70,37 @@ class WebBodyActivity : AppCompatActivity() {
         webSettings.allowFileAccess = true// 设置允许访问文件数据
         webSettings.setSupportZoom(true)//支持缩放
         webSettings.javaScriptCanOpenWindowsAutomatically = true
-        webSettings.cacheMode = WebSettings.LOAD_NO_CACHE
+        webSettings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
         webSettings.domStorageEnabled = true
         webSettings.databaseEnabled = true
         mWebView!!.setOnKeyListener(OnKeyEvent)
         mWebView!!.webViewClient = webClient
-        mWebView!!.loadUrl(blogUrl)
+        mWebView!!.loadUrl(Constants.blogUrl)
+
     }
 
-    private val webClient = object :WebViewClient(){
+    private val webClient = object : WebViewClient() {
         override fun shouldOverrideUrlLoading(
             view: WebView?,
             request: WebResourceRequest?
         ): Boolean {
             return super.shouldOverrideUrlLoading(view, request)
+        }
+
+        override fun onLoadResource(view: WebView?, url: String?) {
+            super.onLoadResource(view, url)
+            Log.i("url", url.toString())
+            Log.i("urlgetDomain", url?.let { getDomain(it) }.toString())
+            if (url?.let { getDomain(it) } == Constants.blogUrlNoHttp) {
+                changeStatusBarColor(R.color.colorAccent)
+                Log.i("urlBlog",url)
+
+            }
+            if (url?.let { getDomain(it) } == Constants.dataUrlNoHttp){
+                Log.i("urlData",url)
+                changeStatusBarColor(R.color.colorAccent)
+
+            }
         }
     }
     private val OnKeyEvent = View.OnKeyListener { v, keyCode, event ->
@@ -107,19 +141,36 @@ class WebBodyActivity : AppCompatActivity() {
         mWebView?.clearCache(true)
         (mWebView?.parent as FrameLayout).removeView(mWebView)
         mWebView?.stopLoading()
-        mWebView?.setWebViewClient(null)
-        mWebView?.setWebChromeClient(null)
+        mWebView?.webViewClient = null
+        mWebView?.webChromeClient = null
         mWebView?.removeAllViews()
         mWebView?.destroy()
         mWebView = null
     }
 
     //扩展函数
-    fun showToast(message: String, length: Int = Toast.LENGTH_SHORT) {
+    private fun showToast(message: String, length: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(this, message, length).show()
     }
 
+    fun getDomain(url: String): String {
+        val result: String
+        var j = 0
+        var startIndex = 0
+        var endIndex = 0
+        for (i in url.indices) {
+            if (url[i] == '/') {
+                j++
+                if (j == 2)
+                    startIndex = i
+                else if (j == 3)
+                    endIndex = i
+            }
 
+        }
+        result = url.substring(startIndex + 1, endIndex)
+        return result
+    }
 
 
 }

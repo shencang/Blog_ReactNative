@@ -8,9 +8,4 @@
     android:orientation="vertical"
     tools:context=".activity.WebBodyActivity">
 
-    <WebView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </WebView>
-
 </FrameLayout>
