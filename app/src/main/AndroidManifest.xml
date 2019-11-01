@@ -13,8 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.AboutActivity"></activity>
-        <activity android:name=".activity.WebBodyActivity" />
+        <activity android:name=".activity.AboutActivity">
+
+        </activity>
+        <activity android:name=".activity.WebBodyActivity"
+            android:configChanges="keyboardHidden|orientation"
+            >
+        </activity>
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
