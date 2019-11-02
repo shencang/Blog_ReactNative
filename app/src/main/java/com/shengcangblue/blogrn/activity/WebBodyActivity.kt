@@ -1,5 +1,6 @@
 package com.shengcangblue.blogrn.activity
 
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -15,9 +16,9 @@ import com.githang.statusbar.StatusBarCompat
 import com.shengcangblue.blogrn.R
 import com.shengcangblue.blogrn.util.Constants
 import com.shengcangblue.blogrn.util.StatusBarUtil
-import java.util.*
 
 class WebBodyActivity : AppCompatActivity() {
+    private val mTAG  = "WebBodyActivity"
     //定义变量
     private var mWebView: WebView? = null
 
@@ -172,6 +173,27 @@ class WebBodyActivity : AppCompatActivity() {
         result = url.substring(startIndex + 1, endIndex)
         return result
     }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        // 检测屏幕的方向：纵向或横向
+        if (this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            //当前为横屏， 在此处添加额外的处理代码
+            Log.i(mTAG,"Configuration.ORIENTATION_LANDSCAPE-横屏")
+        } else if (this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            //当前为竖屏， 在此处添加额外的处理代码
+            Log.i(mTAG,"Configuration.ORIENTATION_PORTRAIT-竖屏")
+        }
+        //检测实体键盘的状态：推出或者合上
+        if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
+            //实体键盘处于推出状态，在此处添加额外的处理代码
+            Log.i(mTAG,"Configuration.HARDKEYBOARDHIDDEN_NO-键盘展开")
+        } else if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
+            //实体键盘处于合上状态，在此处添加额外的处理代码
+            Log.i(mTAG,"Configuration.HARDKEYBOARDHIDDEN_YES-键盘合上")
+        }
+    }
+
 
 
 }

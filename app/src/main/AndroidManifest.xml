@@ -17,8 +17,7 @@
 
         </activity>
         <activity android:name=".activity.WebBodyActivity"
-            android:configChanges="keyboardHidden|orientation"
-            >
+            android:configChanges="keyboardHidden|orientation">
         </activity>
         <activity android:name=".activity.MainActivity">
             <intent-filter>
