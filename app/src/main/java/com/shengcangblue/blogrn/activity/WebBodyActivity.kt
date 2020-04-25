@@ -72,7 +72,7 @@ class WebBodyActivity : AppCompatActivity() {
         webSettings.allowFileAccess = true// 设置允许访问文件数据
         webSettings.setSupportZoom(true)//支持缩放
         webSettings.javaScriptCanOpenWindowsAutomatically = true
-        webSettings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
+        webSettings.cacheMode = WebSettings.LOAD_DEFAULT
         webSettings.domStorageEnabled = true
         webSettings.databaseEnabled = true
         mWebView!!.setOnKeyListener(OnKeyEvent)
